@@ -17,7 +17,7 @@ public class Task {
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    // ✅ Add missing Getters
+    // getter
     public Long getId() {
         return id;
     }
@@ -38,7 +38,7 @@ public class Task {
         return createdAt;
     }
 
-    // ✅ Proper Setters
+    // stters
     public void setTitle(String title) {
         this.title = title;
     }

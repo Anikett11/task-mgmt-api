@@ -21,10 +21,10 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
-        task.setCreatedAt(LocalDateTime.now()); // Ensure createdAt is set
-        Task savedTask = taskService.saveTask(task);
-        return ResponseEntity.status(HttpStatus.CREATED).body(savedTask);
+        Task createdTask = taskService.createTask(task);  // Use createTask instead of saveTask
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
     }
+
 
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {
@@ -43,4 +43,6 @@ public class TaskController {
         taskService.deleteTask(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }
