@@ -8,23 +8,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 @RequestMapping("/tasks")
 public class TaskController {
+
     @Autowired
     private TaskService taskService;
 
     @PostMapping
-
-    public ResponseEntity<Map<String, String>> createTask(@RequestBody Task task) {
-        taskService.saveTask(task);
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Task created successfully");
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    public ResponseEntity<Task> createTask(@RequestBody Task task) {
+        task.setCreatedAt(LocalDateTime.now()); // Ensure createdAt is set
+        Task savedTask = taskService.saveTask(task);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedTask);
     }
 
     @GetMapping

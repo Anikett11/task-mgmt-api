@@ -27,9 +27,15 @@ public class TaskService {
         return repository.save(task);
     }
 
-    public void deleteTask(Long id) {
-        repository.deleteById(id);
-    }
+//    public void deleteTask(Long id) {
+//        repository.deleteById(id);
+//    }
+public void deleteTask(Long id) {
+    Task task = repository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Task not found"));
+    repository.delete(task);
+}
+
 
     // FIXED: Implementing the saveTask method
     public Task saveTask(Task task) {
